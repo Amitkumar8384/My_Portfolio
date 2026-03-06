@@ -2,31 +2,107 @@ const GITHUB_USER = "Amitkumar8384";
 
 const featuredProjects = [
   {
+    slug: "freshnut-ecommerce",
     title: "Freshnut E-commerce Website",
     description: "Responsive e-commerce website with dynamic product listing, reusable UI blocks, and local-storage cart.",
-    image: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80",
+    image: "./images/image.png",
     tech: ["HTML5", "CSS3", "JavaScript ES6", "Local Storage"],
-    live: "#",
-    github: "#",
-    source: "Resume Project"
+    live: "https://amitkumar8384.github.io/FreshNut/",
+    github: "https://github.com/Amitkumar8384/FreshNut",
+    source: "Resume Project",
+    category: "frontend",
+    stars: null,
+    forks: null,
+    caseStudy: {
+      problem: "Need tha ek simple but conversion-focused e-commerce frontend jo fast load ho aur mobile me smooth chale.",
+      approach: "Reusable UI blocks, localStorage cart, and clear product discovery flow build kiya with lightweight vanilla JS.",
+      impact: "Catalog browsing and cart flow friction kam hua; demo deployments aur recruiter reviews me project highlight bana.",
+      stack: "HTML5, CSS3, JavaScript, LocalStorage"
+    }
   },
   {
+    slug: "todo-list-app",
     title: "To-Do List Application",
     description: "Task management app with CRUD operations, DOM event handling, and persistent data using Local Storage API.",
     image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=900&q=80",
     tech: ["HTML5", "CSS3", "JavaScript ES6", "DOM"],
     live: "#",
     github: "#",
-    source: "Resume Project"
+    source: "Resume Project",
+    category: "frontend",
+    stars: null,
+    forks: null,
+    caseStudy: {
+      problem: "Daily task tracking ke liye clean CRUD workflow chahiye tha with zero backend dependency.",
+      approach: "Event-driven DOM updates, input validation, and local storage sync use kiya for reliable persistence.",
+      impact: "Fast prototype se productivity demo ready hua and JavaScript fundamentals strongly showcase hue.",
+      stack: "HTML5, CSS3, JavaScript, LocalStorage"
+    }
   },
   {
+    slug: "ai-dashboard-monitoring-ui",
     title: "AI Dashboard Monitoring UI",
     description: "Data-focused dashboard interface pattern inspired by real-time AI event monitoring workflow.",
     image: "https://images.unsplash.com/photo-1551281044-8d8d7fef9c9f?auto=format&fit=crop&w=900&q=80",
     tech: ["JavaScript", "Angular", "Responsive UI"],
     live: "#",
     github: "#",
-    source: "Experience Based"
+    source: "Experience Based",
+    category: "dashboard",
+    stars: null,
+    forks: null,
+    caseStudy: {
+      problem: "High-volume monitoring context me operators ko quick visual prioritization ki need thi.",
+      approach: "Alert-focused card hierarchy, responsive grid, and dashboard readability patterns apply kiye.",
+      impact: "Complex data ko glanceable format me convert karke triage speed improve hui.",
+      stack: "JavaScript, Angular Patterns, Responsive UI"
+    }
+  }
+];
+
+const services = [
+  {
+    title: "Portfolio Websites",
+    description: "Fast, responsive, recruiter-focused portfolio with real project storytelling and polished UI.",
+    icon: "fa-laptop-code"
+  },
+  {
+    title: "Landing Pages",
+    description: "Conversion-oriented product pages with clean CTAs, semantic structure, and performance-first build.",
+    icon: "fa-bullseye"
+  },
+  {
+    title: "Dashboard UI",
+    description: "Data-dense dashboard interfaces with readable hierarchy, filter patterns, and mobile adaptability.",
+    icon: "fa-chart-line"
+  },
+  {
+    title: "API Integration",
+    description: "Frontend integration with REST APIs, validations, loaders, and resilient error handling flows.",
+    icon: "fa-plug-circle-check"
+  },
+  {
+    title: "UI Revamp",
+    description: "Legacy interface modernization with better spacing systems, interaction polish, and accessibility pass.",
+    icon: "fa-wand-magic-sparkles"
+  }
+];
+
+const testimonials = [
+  {
+    quote: "Amit delivered clean frontend work quickly and handled feedback without delay. The final UI felt production ready.",
+    author: "Team Lead, Ziyyara Edutech",
+    role: "Web Product Team"
+  },
+  {
+    quote: "Strong ownership on responsive behavior and practical JavaScript solutions. Good communication across sprint handoffs.",
+    author: "Operations Manager, Nayan India",
+    role: "AI Dashboard Operations"
+  },
+  {
+    quote: "He improved usability and visual clarity significantly while keeping implementation lightweight and maintainable.",
+    author: "Peer Reviewer",
+    role: "Frontend Collaboration"
   }
 ];
 
@@ -43,6 +119,21 @@ const scrollProgress = document.getElementById("scrollProgress");
 const navBackdrop = document.getElementById("navBackdrop");
 const backToTop = document.getElementById("backToTop");
 const projectsGrid = document.getElementById("projectsGrid");
+const servicesGrid = document.getElementById("servicesGrid");
+const testimonialsGrid = document.getElementById("testimonialsGrid");
+const projectSpotlight = document.getElementById("projectSpotlight");
+const projectFilters = document.getElementById("projectFilters");
+const projectSearchInput = document.getElementById("projectSearchInput");
+const viewAllProjectsBtn = document.getElementById("viewAllProjectsBtn");
+const projectModal = document.getElementById("projectModal");
+const projectModalTitle = document.getElementById("projectModalTitle");
+const projectModalSummary = document.getElementById("projectModalSummary");
+const projectModalBody = document.getElementById("projectModalBody");
+const projectModalCloseBtn = document.getElementById("projectModalCloseBtn");
+const resumeDownloadBtn = document.getElementById("resumeDownloadBtn");
+const resumeDownloadCount = document.getElementById("resumeDownloadCount");
+const canonicalLink = document.getElementById("canonicalLink");
+const ogUrlMeta = document.getElementById("ogUrlMeta");
 const githubStatsList = document.getElementById("githubStatsList");
 const contribGraph = document.getElementById("contribGraph");
 const contactForm = document.getElementById("contactForm");
@@ -53,10 +144,30 @@ const profilePhotos = document.querySelectorAll(".profile-photo");
 const skillCounters = document.querySelectorAll(".skill-counter");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const isTouchDevice = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+const INITIAL_PROJECT_COUNT = 3;
+let allRenderableProjects = [];
+let showAllProjects = false;
+let activeProjectFilter = "all";
+let projectSearchQuery = "";
+let lastFocusedElement = null;
 
-window.addEventListener("load", () => {
+function hideLoader() {
   loader?.classList.add("hidden");
-});
+}
+
+if (!reducedMotion && !isTouchDevice && hasFinePointer) {
+  body.classList.add("custom-cursor-enabled");
+}
+
+// Don't block first interaction on heavy assets (fonts/images/3rd-party requests).
+if (document.readyState === "interactive" || document.readyState === "complete") {
+  hideLoader();
+} else {
+  document.addEventListener("DOMContentLoaded", hideLoader, { once: true });
+}
+window.addEventListener("load", hideLoader, { once: true });
+setTimeout(hideLoader, 1200);
 
 function escapeHtml(value) {
   return String(value)
@@ -77,6 +188,94 @@ function safeExternalUrl(url) {
     return "#";
   }
   return "#";
+}
+
+function toTitleCase(value) {
+  return String(value || "")
+    .replace(/[-_]+/g, " ")
+    .split(" ")
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function formatCompactNumber(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number) || number < 0) {
+    return null;
+  }
+  if (number >= 1000) {
+    return `${(number / 1000).toFixed(1).replace(/\.0$/, "")}k`;
+  }
+  return String(number);
+}
+
+function normalizeProjectCategory(project) {
+  if (project.category) {
+    return String(project.category).toLowerCase();
+  }
+  const techBlob = (project.tech || []).join(" ").toLowerCase();
+  if (techBlob.includes("node") || techBlob.includes("express") || techBlob.includes("mongodb")) {
+    return "fullstack";
+  }
+  if (techBlob.includes("angular") || techBlob.includes("react") || techBlob.includes("dashboard")) {
+    return "dashboard";
+  }
+  return "frontend";
+}
+
+function renderServices() {
+  if (!servicesGrid) {
+    return;
+  }
+  servicesGrid.innerHTML = services
+    .map(
+      (service) => `
+        <article class="service-card glass reveal tilt-card">
+          <div class="service-icon"><i class="fa-solid ${escapeHtml(service.icon)}"></i></div>
+          <h3>${escapeHtml(service.title)}</h3>
+          <p>${escapeHtml(service.description)}</p>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function renderTestimonials() {
+  if (!testimonialsGrid) {
+    return;
+  }
+  testimonialsGrid.innerHTML = testimonials
+    .map(
+      (item) => `
+        <article class="testimonial-card glass reveal tilt-card">
+          <p class="testimonial-quote">"${escapeHtml(item.quote)}"</p>
+          <div class="testimonial-meta">
+            <strong>${escapeHtml(item.author)}</strong>
+            <span>${escapeHtml(item.role)}</span>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function syncSeoUrls() {
+  const url = `${window.location.origin}${window.location.pathname}`;
+  if (canonicalLink instanceof HTMLLinkElement) {
+    canonicalLink.href = url;
+  }
+  if (ogUrlMeta instanceof HTMLMetaElement) {
+    ogUrlMeta.content = url;
+  }
+}
+
+function updateResumeDownloadCountLabel() {
+  if (!resumeDownloadCount) {
+    return;
+  }
+  const count = Number(localStorage.getItem("resume_download_count") || 0);
+  resumeDownloadCount.textContent = count > 0 ? `${count} downloads` : "";
 }
 
 function initProfileImageFallback() {
@@ -209,6 +408,12 @@ window.addEventListener("resize", ensureScrollUnlocked, { passive: true });
 window.addEventListener("pageshow", ensureScrollUnlocked);
 ensureScrollUnlocked();
 
+resumeDownloadBtn?.addEventListener("click", () => {
+  const current = Number(localStorage.getItem("resume_download_count") || 0);
+  localStorage.setItem("resume_download_count", String(current + 1));
+  updateResumeDownloadCountLabel();
+});
+
 // Premium section snapping behavior: nav click aligns section with sticky header offset.
 function scrollToSection(hash) {
   const target = document.querySelector(hash);
@@ -335,7 +540,7 @@ let mouseY = 0;
 let outlineX = 0;
 let outlineY = 0;
 
-if (!reducedMotion && !isTouchDevice) {
+if (!reducedMotion && !isTouchDevice && hasFinePointer) {
   window.addEventListener("mousemove", (event) => {
     mouseX = event.clientX;
     mouseY = event.clientY;
@@ -355,7 +560,7 @@ function animateCursor() {
   }
   requestAnimationFrame(animateCursor);
 }
-if (!reducedMotion && !isTouchDevice) {
+if (!reducedMotion && !isTouchDevice && hasFinePointer) {
   animateCursor();
 }
 
@@ -382,6 +587,10 @@ function applyTiltEffect(selector) {
     return;
   }
   document.querySelectorAll(selector).forEach((card) => {
+    if (card.dataset.tiltBound === "true") {
+      return;
+    }
+    card.dataset.tiltBound = "true";
     card.addEventListener("mousemove", (event) => {
       const rect = card.getBoundingClientRect();
       const x = event.clientX - rect.left;
@@ -402,6 +611,10 @@ function applyMagneticEffect(selector) {
     return;
   }
   document.querySelectorAll(selector).forEach((button) => {
+    if (button.dataset.magneticBound === "true") {
+      return;
+    }
+    button.dataset.magneticBound = "true";
     button.addEventListener("mousemove", (event) => {
       const rect = button.getBoundingClientRect();
       const x = event.clientX - rect.left - rect.width / 2;
@@ -435,17 +648,22 @@ function typeHeroLine() {
 }
 
 function createProjectCard(project, index) {
-  const isFeatured = index === 0;
   const visibleTech = project.tech.slice(0, 4).map(escapeHtml);
   const title = escapeHtml(project.title);
   const description = escapeHtml(project.description);
   const image = safeExternalUrl(project.image);
   const liveUrl = safeExternalUrl(project.live);
   const githubUrl = safeExternalUrl(project.github);
+  const hasLive = liveUrl !== "#";
+  const hasCode = githubUrl !== "#";
   const source = escapeHtml(project.source);
+  const category = normalizeProjectCategory(project);
+  const stars = formatCompactNumber(project.stars);
+  const forks = formatCompactNumber(project.forks);
+  const projectSlug = escapeHtml(getProjectSlug(project));
   const cardStatus = project.source === "GitHub" ? "Live Repository" : "Featured Build";
   return `
-    <article class="project-card ${isFeatured ? "featured" : ""} reveal tilt-card">
+    <article class="project-card reveal tilt-card">
       <span class="project-badge">${source}</span>
       <div class="project-cover">
         <img src="${image}" alt="${title} preview" loading="lazy" decoding="async">
@@ -454,14 +672,28 @@ function createProjectCard(project, index) {
         <span class="project-number">${String(index + 1).padStart(2, "0")}</span>
         <h3>${title}</h3>
         <p>${description}</p>
+        <div class="project-insights">
+          <span class="project-insight-chip"><i class="fa-solid fa-layer-group"></i>&nbsp;${toTitleCase(category)}</span>
+          ${stars ? `<span class="project-insight-chip"><i class="fa-solid fa-star"></i>&nbsp;${stars}</span>` : ""}
+          ${forks ? `<span class="project-insight-chip"><i class="fa-solid fa-code-fork"></i>&nbsp;${forks}</span>` : ""}
+        </div>
         <div class="project-meta">
           ${visibleTech.map((tag) => `<span class="meta-pill">${tag}</span>`).join("")}
         </div>
         <div class="project-footer">
           <span class="project-status">${cardStatus}</span>
           <div class="project-actions">
-            <a href="${liveUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;Live</a>
-            <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary magnetic"><i class="fa-brands fa-github"></i>&nbsp;Code</a>
+            ${
+              hasLive
+                ? `<a href="${liveUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic"><i class="fa-solid fa-arrow-up-right-from-square"></i>&nbsp;Live</a>`
+                : `<button type="button" class="btn btn-primary is-disabled" disabled><i class="fa-solid fa-hourglass-half"></i>&nbsp;Live Soon</button>`
+            }
+            ${
+              hasCode
+                ? `<a href="${githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary magnetic"><i class="fa-brands fa-github"></i>&nbsp;Code</a>`
+                : `<button type="button" class="btn btn-secondary is-disabled" disabled><i class="fa-solid fa-lock"></i>&nbsp;Private</button>`
+            }
+            <button type="button" class="btn btn-glass magnetic case-study-btn" data-project-slug="${projectSlug}"><i class="fa-regular fa-file-lines"></i>&nbsp;Case Study</button>
           </div>
         </div>
       </div>
@@ -483,28 +715,292 @@ function inferProjectImage(repoName) {
   return "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80";
 }
 
+function normalizeTitle(value) {
+  return String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+function mapFeaturedLinksFromRepos(projects, repos) {
+  if (!Array.isArray(repos) || repos.length === 0) {
+    return projects;
+  }
+  const repoByNormalizedName = new Map(
+    repos.map((repo) => [normalizeTitle(repo?.name), repo]).filter(([key]) => key)
+  );
+  return projects.map((project) => {
+    const needsGitHub = !project.github || project.github === "#";
+    const needsLive = !project.live || project.live === "#";
+    if (!needsGitHub && !needsLive) {
+      return project;
+    }
+    const normalizedTitle = normalizeTitle(project.title);
+    let matchedRepo = repoByNormalizedName.get(normalizedTitle);
+    if (!matchedRepo) {
+      matchedRepo = repos.find((repo) => {
+        const repoKey = normalizeTitle(repo?.name);
+        return normalizedTitle.includes(repoKey) || repoKey.includes(normalizedTitle);
+      });
+    }
+    if (!matchedRepo) {
+      return project;
+    }
+    return {
+      ...project,
+      github: needsGitHub ? matchedRepo.html_url || project.github : project.github,
+      live: needsLive
+        ? (matchedRepo.homepage && matchedRepo.homepage.trim() !== "" ? matchedRepo.homepage : matchedRepo.html_url || project.live)
+        : project.live,
+      stars: project.stars ?? matchedRepo.stargazers_count ?? null,
+      forks: project.forks ?? matchedRepo.forks_count ?? null
+    };
+  });
+}
+
+function getProjectSlug(project) {
+  return project.slug || String(project.title || "project").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function getProjectBySlug(slug) {
+  return allRenderableProjects.find((project) => getProjectSlug(project) === slug) || null;
+}
+
+function renderProjectFilters(items) {
+  if (!projectFilters) {
+    return;
+  }
+  const categories = ["all", ...new Set(items.map((item) => normalizeProjectCategory(item)))];
+  if (!categories.includes(activeProjectFilter)) {
+    activeProjectFilter = "all";
+  }
+
+  const query = projectSearchQuery.trim().toLowerCase();
+  const getCountByCategory = (category) => {
+    return items.filter((project) => {
+      const categoryMatch = category === "all" || normalizeProjectCategory(project) === category;
+      if (!categoryMatch) {
+        return false;
+      }
+      if (!query) {
+        return true;
+      }
+      const blob = `${project.title} ${project.description} ${(project.tech || []).join(" ")} ${project.source}`.toLowerCase();
+      return blob.includes(query);
+    }).length;
+  };
+
+  projectFilters.innerHTML = categories
+    .map((category) => {
+      const isActive = category === activeProjectFilter;
+      const count = getCountByCategory(category);
+      return `<button type="button" class="project-filter-chip${isActive ? " is-active" : ""}" data-filter="${escapeHtml(category)}" role="tab" aria-selected="${String(isActive)}"><span>${toTitleCase(category)}</span><em>${count}</em></button>`;
+    })
+    .join("");
+}
+
+function getFilteredProjects() {
+  const query = projectSearchQuery.trim().toLowerCase();
+  return allRenderableProjects.filter((project) => {
+    const category = normalizeProjectCategory(project);
+    const categoryMatch = activeProjectFilter === "all" || category === activeProjectFilter;
+    if (!categoryMatch) {
+      return false;
+    }
+    if (!query) {
+      return true;
+    }
+    const blob = `${project.title} ${project.description} ${(project.tech || []).join(" ")} ${project.source}`.toLowerCase();
+    return blob.includes(query);
+  });
+}
+
+function renderProjectSpotlight(project) {
+  if (!projectSpotlight) {
+    return;
+  }
+  if (!project) {
+    projectSpotlight.innerHTML = "";
+    return;
+  }
+
+  const monthLabel = new Date().toLocaleString("en-US", { month: "long", year: "numeric" });
+  const slug = escapeHtml(getProjectSlug(project));
+  const stars = formatCompactNumber(project.stars);
+  const forks = formatCompactNumber(project.forks);
+  const liveUrl = safeExternalUrl(project.live);
+  const githubUrl = safeExternalUrl(project.github);
+
+  projectSpotlight.innerHTML = `
+    <div class="spotlight-media">
+      <img src="${safeExternalUrl(project.image)}" alt="${escapeHtml(project.title)} spotlight preview" loading="lazy" decoding="async">
+    </div>
+    <div class="spotlight-content">
+      <p class="spotlight-eyebrow">Project Of The Month · ${escapeHtml(monthLabel)}</p>
+      <h3>${escapeHtml(project.title)}</h3>
+      <p>${escapeHtml(project.description)}</p>
+      <div class="spotlight-stats">
+        <span class="project-insight-chip"><i class="fa-solid fa-layer-group"></i>&nbsp;${toTitleCase(normalizeProjectCategory(project))}</span>
+        ${stars ? `<span class="project-insight-chip"><i class="fa-solid fa-star"></i>&nbsp;${stars}</span>` : ""}
+        ${forks ? `<span class="project-insight-chip"><i class="fa-solid fa-code-fork"></i>&nbsp;${forks}</span>` : ""}
+      </div>
+      <div class="spotlight-actions">
+        <a href="${liveUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">Visit Live</a>
+        <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary magnetic">View Code</a>
+        <button type="button" class="btn btn-glass magnetic case-study-btn" data-project-slug="${slug}">Case Study</button>
+      </div>
+    </div>
+  `;
+}
+
+function openProjectModal(project) {
+  if (!projectModal || !projectModalTitle || !projectModalSummary || !projectModalBody) {
+    return;
+  }
+  const fallbackCase = {
+    problem: "Project objective and business context were defined around usability and clear execution.",
+    approach: "Built with incremental iterations, reusable components, and practical engineering tradeoffs.",
+    impact: "Delivered a working product experience with measurable value for demos and portfolio showcase.",
+    stack: (project.tech || []).join(", ")
+  };
+  const details = project.caseStudy || fallbackCase;
+  const galleryImages = Array.isArray(project.gallery) && project.gallery.length
+    ? project.gallery
+    : [project.image];
+  const safeGallery = galleryImages.map((img) => safeExternalUrl(img)).filter((img) => img !== "#");
+  const mainImage = safeGallery[0] || safeExternalUrl(project.image);
+  projectModalTitle.textContent = `${project.title} · Case Study`;
+  projectModalSummary.textContent = project.description;
+  projectModalBody.innerHTML = `
+    <section class="project-modal-gallery">
+      <div class="project-modal-main-image-wrap">
+        <img id="projectModalMainImage" src="${mainImage}" alt="${escapeHtml(project.title)} screenshot" class="project-modal-main-image" loading="lazy" decoding="async">
+        <button type="button" class="project-modal-nav-btn prev" data-modal-nav="-1" aria-label="Previous screenshot">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button type="button" class="project-modal-nav-btn next" data-modal-nav="1" aria-label="Next screenshot">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="project-modal-thumbs">
+        ${safeGallery
+          .map(
+            (img, idx) =>
+              `<button type="button" class="project-modal-thumb${idx === 0 ? " is-active" : ""}" data-modal-image="${img}" aria-label="Open screenshot ${idx + 1}">
+                 <img src="${img}" alt="${escapeHtml(project.title)} thumbnail ${idx + 1}" loading="lazy" decoding="async">
+               </button>`
+          )
+          .join("")}
+      </div>
+    </section>
+    <article><h4>Problem</h4><p>${escapeHtml(details.problem || fallbackCase.problem)}</p></article>
+    <article><h4>Approach</h4><p>${escapeHtml(details.approach || fallbackCase.approach)}</p></article>
+    <article><h4>Impact</h4><p>${escapeHtml(details.impact || fallbackCase.impact)}</p></article>
+    <article><h4>Stack</h4><p>${escapeHtml(details.stack || fallbackCase.stack)}</p></article>
+  `;
+  updateModalGalleryNav();
+  lastFocusedElement = document.activeElement;
+  projectModal.classList.add("is-open");
+  projectModal.setAttribute("aria-hidden", "false");
+  body.classList.add("modal-open");
+  projectModalCloseBtn?.focus();
+}
+
+function closeProjectModal() {
+  if (!projectModal) {
+    return;
+  }
+  projectModal.classList.remove("is-open");
+  projectModal.setAttribute("aria-hidden", "true");
+  body.classList.remove("modal-open");
+  if (lastFocusedElement instanceof HTMLElement) {
+    lastFocusedElement.focus();
+  }
+}
+
+function setActiveModalImage(nextImage, activeThumb) {
+  if (!projectModal || !nextImage) {
+    return;
+  }
+  const mainImage = projectModal.querySelector("#projectModalMainImage");
+  if (mainImage instanceof HTMLImageElement) {
+    mainImage.src = nextImage;
+  }
+  projectModal.querySelectorAll(".project-modal-thumb").forEach((el) => el.classList.remove("is-active"));
+  if (activeThumb instanceof HTMLElement) {
+    activeThumb.classList.add("is-active");
+  }
+}
+
+function updateModalGalleryNav() {
+  if (!projectModal) {
+    return;
+  }
+  const thumbCount = projectModal.querySelectorAll(".project-modal-thumb").length;
+  const hasMultiple = thumbCount > 1;
+  projectModal.querySelectorAll(".project-modal-nav-btn").forEach((btn) => {
+    if (btn instanceof HTMLButtonElement) {
+      btn.disabled = !hasMultiple;
+      btn.hidden = !hasMultiple;
+    }
+  });
+}
+
+function moveModalGallery(direction) {
+  if (!projectModal) {
+    return;
+  }
+  const thumbs = Array.from(projectModal.querySelectorAll(".project-modal-thumb"));
+  if (thumbs.length <= 1) {
+    return;
+  }
+  const currentIndex = Math.max(0, thumbs.findIndex((el) => el.classList.contains("is-active")));
+  const nextIndex = (currentIndex + direction + thumbs.length) % thumbs.length;
+  const nextThumb = thumbs[nextIndex];
+  if (!(nextThumb instanceof HTMLElement)) {
+    return;
+  }
+  const nextImage = String(nextThumb.dataset.modalImage || "");
+  setActiveModalImage(nextImage, nextThumb);
+}
+
 async function fetchGitHubRepos() {
   try {
-    const response = await fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=12`);
+    const response = await fetch(`/api/github/repos?user=${encodeURIComponent(GITHUB_USER)}`);
     if (!response.ok) {
       throw new Error("Unable to load GitHub repositories");
     }
 
-    const repos = await response.json();
-    return repos
+    const result = await response.json();
+    const repos = Array.isArray(result?.items) ? result.items : [];
+    const items = repos
       .filter((repo) => !repo.fork && !repo.archived)
+      .sort((a, b) => {
+        if (b.stargazers_count !== a.stargazers_count) {
+          return b.stargazers_count - a.stargazers_count;
+        }
+        return new Date(b.updated_at) - new Date(a.updated_at);
+      })
       .slice(0, 6)
       .map((repo) => ({
+        slug: `gh-${repo.id}`,
         title: repo.name,
         description: repo.description || "Production-ready repository with clean structure and iterative improvements.",
         image: inferProjectImage(repo.name),
         tech: [repo.language || "JavaScript", "Git", "GitHub"],
         live: repo.homepage && repo.homepage.trim() !== "" ? repo.homepage : repo.html_url,
         github: repo.html_url,
-        source: "GitHub"
+        source: "GitHub",
+        category: normalizeProjectCategory({ tech: [repo.language || "JavaScript", ...(repo.topics || [])] }),
+        stars: repo.stargazers_count,
+        forks: repo.forks_count,
+        caseStudy: {
+          problem: "Repository me maintainable and production-friendly structure preserve karna with frequent iteration.",
+          approach: "Modular commits, readable code organization, and progressive feature delivery approach follow kiya.",
+          impact: "Open-source visibility improve hui with clearer code quality signals for recruiters and collaborators.",
+          stack: `${repo.language || "JavaScript"}, Git, GitHub`
+        }
       }));
+    return { items, raw: repos };
   } catch (error) {
-    return [];
+    return { items: [], raw: [] };
   }
 }
 
@@ -513,16 +1009,17 @@ async function renderProjects() {
     return;
   }
 
-  projectsGrid.innerHTML = `
-    <article class="project-card skeleton" aria-hidden="true"></article>
-    <article class="project-card skeleton" aria-hidden="true"></article>
-  `;
-  const githubProjects = await fetchGitHubRepos();
-  const allProjects = [...featuredProjects, ...githubProjects];
+  // Render featured projects immediately; enrich with GitHub projects in background.
+  allRenderableProjects = [...featuredProjects];
+  showAllProjects = false;
+  renderProjectFilters(allRenderableProjects);
+  renderProjectsList();
 
+  const { items: githubProjects, raw: rawRepos } = await fetchGitHubRepos();
+  const featuredWithRealLinks = mapFeaturedLinksFromRepos(featuredProjects, rawRepos);
   const unique = [];
   const usedTitles = new Set();
-  allProjects.forEach((project) => {
+  [...featuredWithRealLinks, ...githubProjects].forEach((project) => {
     const titleKey = project.title.toLowerCase();
     if (!usedTitles.has(titleKey)) {
       usedTitles.add(titleKey);
@@ -530,11 +1027,134 @@ async function renderProjects() {
     }
   });
 
-  projectsGrid.innerHTML = unique.map((project, index) => createProjectCard(project, index)).join("");
+  allRenderableProjects = unique;
+  renderProjectFilters(allRenderableProjects);
+  renderProjectsList();
+}
+
+function renderProjectsList() {
+  if (!projectsGrid) {
+    return;
+  }
+  const filteredProjects = getFilteredProjects();
+  const items = showAllProjects ? filteredProjects : filteredProjects.slice(0, INITIAL_PROJECT_COUNT);
+  projectsGrid.innerHTML = items.length
+    ? items.map((project, index) => createProjectCard(project, index)).join("")
+    : `<article class="project-card glass"><div class="project-content"><h3>No projects found</h3><p>Try another keyword or filter to view matching projects.</p></div></article>`;
+  renderProjectSpotlight(filteredProjects[0] || allRenderableProjects[0]);
+  if (viewAllProjectsBtn) {
+    const hasMore = filteredProjects.length > INITIAL_PROJECT_COUNT;
+    viewAllProjectsBtn.hidden = !hasMore;
+    viewAllProjectsBtn.textContent = showAllProjects ? "Show Top 3" : "View All Projects";
+    viewAllProjectsBtn.setAttribute("aria-expanded", String(showAllProjects));
+  }
   observeRevealElements();
   applyTiltEffect(".tilt-card");
   applyMagneticEffect(".magnetic");
 }
+
+viewAllProjectsBtn?.addEventListener("click", () => {
+  showAllProjects = !showAllProjects;
+  renderProjectsList();
+});
+
+projectFilters?.addEventListener("click", (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+  const button = target.closest("[data-filter]");
+  if (!(button instanceof HTMLElement)) {
+    return;
+  }
+  activeProjectFilter = String(button.dataset.filter || "all");
+  showAllProjects = false;
+  renderProjectFilters(allRenderableProjects);
+  renderProjectsList();
+});
+
+projectSearchInput?.addEventListener("input", () => {
+  projectSearchQuery = projectSearchInput.value || "";
+  showAllProjects = false;
+  renderProjectFilters(allRenderableProjects);
+  renderProjectsList();
+});
+
+projectsGrid?.addEventListener("click", (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+  const trigger = target.closest(".case-study-btn");
+  if (!(trigger instanceof HTMLElement)) {
+    return;
+  }
+  const slug = String(trigger.dataset.projectSlug || "");
+  const project = getProjectBySlug(slug);
+  if (project) {
+    openProjectModal(project);
+  }
+});
+
+projectSpotlight?.addEventListener("click", (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+  const trigger = target.closest(".case-study-btn");
+  if (!(trigger instanceof HTMLElement)) {
+    return;
+  }
+  const slug = String(trigger.dataset.projectSlug || "");
+  const project = getProjectBySlug(slug);
+  if (project) {
+    openProjectModal(project);
+  }
+});
+
+projectModalCloseBtn?.addEventListener("click", closeProjectModal);
+projectModal?.addEventListener("click", (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+  if (target.matches("[data-close-project-modal]")) {
+    closeProjectModal();
+    return;
+  }
+  const navButton = target.closest("[data-modal-nav]");
+  if (navButton instanceof HTMLElement) {
+    const step = Number(navButton.dataset.modalNav || "0");
+    if (step !== 0) {
+      moveModalGallery(step);
+    }
+    return;
+  }
+  const thumb = target.closest("[data-modal-image]");
+  if (thumb instanceof HTMLElement) {
+    const nextImage = String(thumb.dataset.modalImage || "");
+    if (nextImage) {
+      setActiveModalImage(nextImage, thumb);
+    }
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && projectModal?.classList.contains("is-open")) {
+    closeProjectModal();
+    return;
+  }
+  if (!projectModal?.classList.contains("is-open")) {
+    return;
+  }
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    moveModalGallery(-1);
+  } else if (event.key === "ArrowRight") {
+    event.preventDefault();
+    moveModalGallery(1);
+  }
+});
 
 async function loadGitHubStats() {
   setGitHubGraph();
@@ -551,51 +1171,69 @@ async function loadGitHubStats() {
   `;
 
   try {
-    const [profileResponse, reposResponse] = await Promise.all([
-      fetch(`https://api.github.com/users/${GITHUB_USER}`),
-      fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`)
-    ]);
+    let profile = null;
+    let topLanguage = "JavaScript";
+    let recentlyUpdated = "";
 
-    if (!profileResponse.ok || !reposResponse.ok) {
-      throw new Error("Unable to fetch profile stats");
-    }
-
-    const profile = await profileResponse.json();
-    const repos = await reposResponse.json();
-
-    const languageCount = repos.reduce((acc, repo) => {
-      if (repo.language) {
-        acc[repo.language] = (acc[repo.language] || 0) + 1;
+    try {
+      const response = await fetch(`/api/github/stats?user=${encodeURIComponent(GITHUB_USER)}`);
+      if (!response.ok) {
+        throw new Error("Proxy unavailable");
       }
-      return acc;
-    }, {});
+      const result = await response.json();
+      if (!result?.ok) {
+        throw new Error("Proxy unavailable");
+      }
+      profile = result.profile || {};
+      topLanguage = result.topLanguage || "JavaScript";
+      recentlyUpdated = Array.isArray(result.recentlyUpdated) ? result.recentlyUpdated.join(", ") : "";
+    } catch {
+      const [profileResult, reposResult] = await Promise.allSettled([
+        fetch(`https://api.github.com/users/${GITHUB_USER}`),
+        fetch(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100`)
+      ]);
 
-    const topLanguage = Object.entries(languageCount)
-      .sort((a, b) => b[1] - a[1])[0]?.[0] || "JavaScript";
+      const profileResponse = profileResult.status === "fulfilled" ? profileResult.value : null;
+      const reposResponse = reposResult.status === "fulfilled" ? reposResult.value : null;
+      const profileData = profileResponse?.ok ? await profileResponse.json() : null;
+      const repos = reposResponse?.ok ? await reposResponse.json() : [];
 
-    const recentlyUpdated = repos
-      .filter((repo) => !repo.fork)
-      .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
-      .slice(0, 3)
-      .map((repo) => repo.name)
-      .join(", ");
+      if (!profileData && !Array.isArray(repos)) {
+        throw new Error("Unable to fetch profile stats");
+      }
+
+      profile = profileData || {};
+      const languageCount = (Array.isArray(repos) ? repos : []).reduce((acc, repo) => {
+        if (repo?.language) {
+          acc[repo.language] = (acc[repo.language] || 0) + 1;
+        }
+        return acc;
+      }, {});
+      topLanguage = Object.entries(languageCount).sort((a, b) => b[1] - a[1])[0]?.[0] || "JavaScript";
+      recentlyUpdated = (Array.isArray(repos) ? repos : [])
+        .filter((repo) => repo && !repo.fork)
+        .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+        .slice(0, 3)
+        .map((repo) => repo.name)
+        .join(", ");
+    }
 
     githubStatsList.innerHTML = `
       <article class="stat-card tilt-card">
         <span class="stat-label">Public Repositories</span>
-        <span class="stat-value">${profile.public_repos}</span>
+        <span class="stat-value">${profile?.public_repos ?? "--"}</span>
       </article>
       <article class="stat-card tilt-card">
         <span class="stat-label">Followers</span>
-        <span class="stat-value">${profile.followers}</span>
+        <span class="stat-value">${profile?.followers ?? "--"}</span>
       </article>
       <article class="stat-card tilt-card">
         <span class="stat-label">Following</span>
-        <span class="stat-value">${profile.following}</span>
+        <span class="stat-value">${profile?.following ?? "--"}</span>
       </article>
       <article class="stat-card tilt-card">
         <span class="stat-label">Top Language</span>
-        <span class="stat-value">${topLanguage}</span>
+        <span class="stat-value">${topLanguage || "N/A"}</span>
       </article>
       <article class="stat-card wide tilt-card">
         <span class="stat-label">Recently Updated Repos</span>
@@ -612,7 +1250,6 @@ async function loadGitHubStats() {
     `;
   }
 }
-
 function setGitHubGraph() {
   if (!contribGraph) {
     return;
@@ -803,10 +1440,85 @@ function runParticleBackground() {
   draw();
 }
 
+function initHeroParallax() {
+  if (reducedMotion || isTouchDevice) {
+    return;
+  }
+  const hero = document.getElementById("hero");
+  const layers = Array.from(document.querySelectorAll(".hero-parallax-layer"));
+  const heroCard = document.querySelector(".hero-card");
+  if (!(hero instanceof HTMLElement) || layers.length === 0) {
+    return;
+  }
+
+  let rafId = null;
+  const state = { x: 0, y: 0 };
+
+  const applyTransforms = () => {
+    rafId = null;
+    layers.forEach((layer, index) => {
+      const depth = (index + 1) * 0.55;
+      layer.style.transform = `translate(${state.x * depth}px, ${state.y * depth}px)`;
+    });
+    if (heroCard instanceof HTMLElement) {
+      heroCard.style.transform = `translate(${state.x * 0.4}px, ${state.y * 0.4}px)`;
+    }
+  };
+
+  hero.addEventListener("mousemove", (event) => {
+    const rect = hero.getBoundingClientRect();
+    const nx = (event.clientX - rect.left) / rect.width - 0.5;
+    const ny = (event.clientY - rect.top) / rect.height - 0.5;
+    state.x = nx * 18;
+    state.y = ny * 14;
+    if (rafId === null) {
+      rafId = requestAnimationFrame(applyTransforms);
+    }
+  });
+
+  hero.addEventListener("mouseleave", () => {
+    state.x = 0;
+    state.y = 0;
+    if (rafId === null) {
+      rafId = requestAnimationFrame(applyTransforms);
+    }
+  });
+}
+
 runParticleBackground();
+initHeroParallax();
 typeHeroLine();
+syncSeoUrls();
+updateResumeDownloadCountLabel();
+renderServices();
+renderTestimonials();
 renderProjects();
-loadGitHubStats();
+const githubSection = document.getElementById("github");
+let githubStatsLoaded = false;
+const loadGitHubStatsOnce = () => {
+  if (githubStatsLoaded) {
+    return;
+  }
+  githubStatsLoaded = true;
+  loadGitHubStats();
+};
+if (githubSection && "IntersectionObserver" in window) {
+  const githubObserver = new IntersectionObserver(
+    (entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        loadGitHubStatsOnce();
+        githubObserver.disconnect();
+      }
+    },
+    { threshold: 0.2 }
+  );
+  githubObserver.observe(githubSection);
+} else if ("requestIdleCallback" in window) {
+  window.requestIdleCallback(loadGitHubStatsOnce, { timeout: 2000 });
+} else {
+  setTimeout(loadGitHubStatsOnce, 250);
+}
+setTimeout(loadGitHubStatsOnce, 1800);
 applyTiltEffect(".tilt-card");
 applyMagneticEffect(".magnetic");
 initProfileImageFallback();

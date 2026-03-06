@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -12,12 +12,12 @@
   <meta property="og:title" content="Amit Kumar | Frontend Developer Portfolio">
   <meta property="og:description" content="Frontend developer portfolio with projects, GitHub activity, and contact details.">
   <meta property="og:image" content="images/portfolio_image-removebg-preview (3).png">
-  <meta property="og:url" content="https://example.com/">
+  <meta property="og:url" content="https://amitkumar8384.github.io/FreshNut/" id="ogUrlMeta">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Amit Kumar | Frontend Developer Portfolio">
   <meta name="twitter:description" content="Modern responsive portfolio by Amit Kumar.">
   <meta name="twitter:image" content="images/portfolio_image-removebg-preview (3).png">
-  <link rel="canonical" href="https://example.com/">
+  <link rel="canonical" href="https://amitkumar8384.github.io/FreshNut/" id="canonicalLink">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
       "jobTitle": "Frontend Developer",
       "email": "mailto:Amitkumar838401@gmail.com",
       "telephone": "+91-8384010361",
-      "url": "https://example.com/",
+      "url": "https://amitkumar8384.github.io/FreshNut/",
       "sameAs": [
         "https://github.com/Amitkumar8384",
         "https://linkedin.com/in/amitkumar"
@@ -70,7 +70,9 @@
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#skills">Skills</a></li>
+        <li><a href="#services">Services</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
         <li><a href="#github">GitHub</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -88,19 +90,33 @@
   <main id="mainContent">
     <section id="hero" class="hero section">
       <div class="hero-content reveal">
-        <p class="eyebrow">Web Developer / Frontend Developer</p>
-        <h1>Amit Kumar</h1>
-        <h2 class="hero-title-glow">Frontend Developer</h2>
-        <p class="tagline" id="typedLine">I build modern and scalable web applications</p>
+        <p class="eyebrow hero-line">Web Developer / Frontend Developer</p>
+        <h1 class="hero-line">Amit Kumar</h1>
+        <h2 class="hero-title-glow hero-line">Frontend Developer</h2>
+        <p class="tagline hero-line" id="typedLine">I build modern and scalable web applications</p>
+        <div class="hero-proof">
+          <span><i class="fa-solid fa-bolt"></i>&nbsp;Performance-first UI</span>
+          <span><i class="fa-solid fa-mobile-screen"></i>&nbsp;Responsive by default</span>
+          <span><i class="fa-solid fa-code-branch"></i>&nbsp;Clean Git workflow</span>
+        </div>
 
         <div class="hero-buttons">
           <a href="#projects" class="btn btn-primary magnetic">View Projects</a>
           <a href="#contact" class="btn btn-secondary magnetic">Contact Me</a>
-          <a href="assets/AmitKumarResume.pdf" class="btn btn-glass magnetic" download>Download Resume</a>
+          <a id="resumeDownloadBtn" href="assets/AmitKumarResume.pdf" class="btn btn-glass magnetic" download>Download Resume</a>
+          <span id="resumeDownloadCount" class="resume-download-count" aria-live="polite"></span>
+        </div>
+        <div class="hero-kpis">
+          <article><strong>12+</strong><span>Projects</span></article>
+          <article><strong>2+</strong><span>Years Exposure</span></article>
+          <article><strong>100%</strong><span>Responsive</span></article>
         </div>
       </div>
 
       <div class="hero-visual reveal">
+        <div class="hero-parallax-layer layer-a" aria-hidden="true"></div>
+        <div class="hero-parallax-layer layer-b" aria-hidden="true"></div>
+        <div class="hero-parallax-layer layer-c" aria-hidden="true"></div>
         <div class="orb orb-one"></div>
         <div class="orb orb-two"></div>
         <div class="hero-card glass tilt-card">
@@ -110,6 +126,10 @@
           </div>
           <p>Frontend Systems</p>
           <h3>JavaScript, Angular, React concepts, and responsive UI development with real-world delivery.</h3>
+          <div class="hero-card-meta">
+            <span><i class="fa-solid fa-location-dot"></i>&nbsp;New Delhi</span>
+            <span><i class="fa-solid fa-briefcase"></i>&nbsp;Open to Work</span>
+          </div>
         </div>
       </div>
     </section>
@@ -117,26 +137,38 @@
     <section id="about" class="section">
       <h2 class="section-title reveal">About</h2>
       <div class="about-grid">
-        <article class="glass reveal tilt-card">
-          <h3>Summary</h3>
-          <p>
-            Frontend Developer skilled in JavaScript, Angular, and responsive UI development.
-            Experienced in building dynamic dashboards with real-time data handling and validation.
+        <article class="glass reveal tilt-card about-story-card">
+          <p class="about-kicker">Frontend Engineer - Problem Solver</p>
+          <h3>Building User Interfaces That Feel Fast, Clear, and Reliable</h3>
+          <p class="about-intro">
+            I design and build frontend experiences that balance visual polish with practical engineering.
+            My focus is delivering maintainable code, responsive layouts, and predictable user flows.
           </p>
-          <p>
-            Focused on delivering scalable, user-friendly web applications with clean architecture,
-            performance optimization, and maintainable code quality.
-          </p>
+          <ul class="about-points">
+            <li>Strong foundation in JavaScript, Angular workflows, and component-driven UI architecture.</li>
+            <li>Hands-on exposure to real-time dashboards, API integrations, and data validation patterns.</li>
+            <li>Performance-first implementation with accessibility and scalability in mind.</li>
+          </ul>
+          <div class="about-cta">
+            <a href="#projects" class="btn btn-primary magnetic">View Projects</a>
+            <a href="#contact" class="btn btn-glass magnetic">Work With Me</a>
+          </div>
         </article>
 
-        <article class="glass profile-card reveal tilt-card">
+        <article class="glass profile-card reveal tilt-card about-profile-card">
           <div class="profile-image-frame">
             <img src="images/portfolio_image-removebg-preview (3).png" alt="Amit Kumar" class="profile-image profile-photo" loading="lazy" decoding="async">
             <div class="profile-placeholder" aria-label="Profile image placeholder">AK</div>
           </div>
           <h3>Amit Kumar</h3>
-          <p>Web Developer / Frontend Developer</p>
-          <p class="journey">New Delhi, India | API Integration | DOM Manipulation | Responsive Design</p>
+          <p class="about-role">Web Developer / Frontend Developer</p>
+          <p class="journey">New Delhi, India Â· API Integration Â· DOM Manipulation Â· Responsive Design</p>
+          <div class="about-quick-grid">
+            <article><span>Primary</span><strong>JavaScript</strong></article>
+            <article><span>Framework</span><strong>Angular</strong></article>
+            <article><span>Delivery</span><strong>Responsive UI</strong></article>
+            <article><span>Versioning</span><strong>Git / GitHub</strong></article>
+          </div>
         </article>
       </div>
     </section>
@@ -261,12 +293,33 @@
       </div>
     </section>
 
+    <section id="services" class="section">
+      <h2 class="section-title reveal">Services</h2>
+      <div id="servicesGrid" class="services-grid" aria-live="polite"></div>
+    </section>
+
     <section id="projects" class="section">
       <div class="section-header">
         <h2 class="section-title reveal">Projects</h2>
         <p class="reveal">Featured from resume + auto-loaded GitHub repositories</p>
       </div>
+      <article id="projectSpotlight" class="project-spotlight glass reveal" aria-live="polite"></article>
+      <div class="projects-controls reveal">
+        <div id="projectFilters" class="project-filters" role="tablist" aria-label="Project categories"></div>
+        <label class="project-search-wrap" for="projectSearchInput">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input id="projectSearchInput" type="search" placeholder="Search projects..." autocomplete="off">
+        </label>
+      </div>
       <div id="projectsGrid" class="projects-grid" aria-live="polite"></div>
+      <div class="projects-more reveal">
+        <button id="viewAllProjectsBtn" type="button" class="btn btn-secondary magnetic" hidden>View All Projects</button>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section">
+      <h2 class="section-title reveal">Testimonials</h2>
+      <div id="testimonialsGrid" class="testimonials-grid" aria-live="polite"></div>
     </section>
 
     <section id="github" class="section">
@@ -321,9 +374,21 @@
   <footer class="site-footer">
     <p>Copyright 2026 Amit Kumar. Built with HTML, CSS, JavaScript.</p>
   </footer>
+  <div id="projectModal" class="project-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="projectModalTitle">
+    <div class="project-modal-backdrop" data-close-project-modal></div>
+    <article class="project-modal-card glass">
+      <button id="projectModalCloseBtn" class="project-modal-close icon-btn" type="button" aria-label="Close case study">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 id="projectModalTitle"></h3>
+      <p id="projectModalSummary" class="project-modal-summary"></p>
+      <div id="projectModalBody" class="project-modal-body"></div>
+    </article>
+  </div>
   <noscript>
     <p class="noscript-note">This website works best with JavaScript enabled.</p>
   </noscript>
   <script src="script.js" defer></script>
 </body>
 </html>
+

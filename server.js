@@ -15,8 +15,10 @@ const BODY_LIMIT_BYTES = 32 * 1024;
 const RATE_LIMIT_WINDOW_MS = 5 * 60 * 1000;
 const RATE_LIMIT_MAX = 15;
 const rateLimitByIp = new Map();
+const githubCache = new Map();
+const GITHUB_CACHE_TTL_MS = 10 * 60 * 1000;
 
-const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "Amitkumar1999");
+const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const RESEND_API_KEY = String(process.env.RESEND_API_KEY || "");
 const WEB3FORMS_ACCESS_KEY = String(process.env.WEB3FORMS_ACCESS_KEY || "");
 const CONTACT_TO_EMAIL = String(process.env.CONTACT_TO_EMAIL || "Amitkumar838401@gmail.com");
@@ -172,6 +174,20 @@ function resolveStaticPath(urlPath) {
   const cleaned = withoutQuery === "/" ? "/index.html" : withoutQuery;
   const decoded = decodeURIComponent(cleaned);
   const safeRelative = decoded.replace(/^\/+/, "");
+  const normalized = safeRelative.replace(/\\/g, "/").toLowerCase();
+  const isBlocked =
+    normalized.startsWith("data/") ||
+    normalized === "data" ||
+    normalized.startsWith(".") ||
+    normalized.startsWith("server.") ||
+    normalized.startsWith("package.") ||
+    normalized.startsWith("dockerfile") ||
+    normalized.startsWith("procfile") ||
+    normalized.startsWith("render.yaml") ||
+    normalized.startsWith(".env");
+  if (isBlocked) {
+    return null;
+  }
   const resolved = path.resolve(WEB_ROOT, safeRelative);
   if (!resolved.startsWith(WEB_ROOT)) {
     return null;
@@ -206,7 +222,7 @@ async function serveStatic(req, res) {
   }
 }
 
-function getAdminTokenFromRequest(req, urlObj) {
+function getAdminTokenFromRequest(req) {
   const auth = String(req.headers.authorization || "");
   if (auth.startsWith("Bearer ")) {
     return auth.slice("Bearer ".length).trim();
@@ -215,14 +231,14 @@ function getAdminTokenFromRequest(req, urlObj) {
   if (headerToken) {
     return headerToken;
   }
-  return String(urlObj.searchParams.get("token") || "").trim();
+  return "";
 }
 
 function isAuthorizedAdmin(req, urlObj) {
   if (!ADMIN_TOKEN) {
     return false;
   }
-  const token = getAdminTokenFromRequest(req, urlObj);
+  const token = getAdminTokenFromRequest(req);
   return token === ADMIN_TOKEN;
 }
 
@@ -262,6 +278,116 @@ function postJsonHttps(url, payload, headers = {}) {
     req.write(data);
     req.end();
   });
+}
+
+function getJsonHttps(url, headers = {}) {
+  return new Promise((resolve, reject) => {
+    const parsed = new URL(url);
+    const req = https.request(
+      {
+        hostname: parsed.hostname,
+        path: `${parsed.pathname}${parsed.search}`,
+        method: "GET",
+        port: 443,
+        headers
+      },
+      (res) => {
+        let raw = "";
+        res.on("data", (chunk) => {
+          raw += chunk;
+        });
+        res.on("end", () => {
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            try {
+              resolve(JSON.parse(raw || "{}"));
+            } catch {
+              reject(new Error("Invalid JSON from upstream."));
+            }
+            return;
+          }
+          reject(new Error(`GitHub upstream error: ${res.statusCode}`));
+        });
+      }
+    );
+    req.on("error", reject);
+    req.end();
+  });
+}
+
+function getCachedGithub(key) {
+  const cached = githubCache.get(key);
+  if (!cached) {
+    return null;
+  }
+  if (Date.now() - cached.timestamp > GITHUB_CACHE_TTL_MS) {
+    githubCache.delete(key);
+    return null;
+  }
+  return cached.value;
+}
+
+function setCachedGithub(key, value) {
+  githubCache.set(key, { timestamp: Date.now(), value });
+}
+
+async function fetchGithubStats(username) {
+  const cacheKey = `stats:${username}`;
+  const cached = getCachedGithub(cacheKey);
+  if (cached) {
+    return cached;
+  }
+
+  const headers = {
+    Accept: "application/vnd.github+json",
+    "User-Agent": "portfolio-server"
+  };
+
+  const [profileRaw, reposRaw] = await Promise.all([
+    getJsonHttps(`https://api.github.com/users/${encodeURIComponent(username)}`, headers),
+    getJsonHttps(`https://api.github.com/users/${encodeURIComponent(username)}/repos?per_page=100`, headers)
+  ]);
+
+  const repos = Array.isArray(reposRaw) ? reposRaw : [];
+  const languageCount = repos.reduce((acc, repo) => {
+    if (repo && repo.language) {
+      acc[repo.language] = (acc[repo.language] || 0) + 1;
+    }
+    return acc;
+  }, {});
+  const topLanguage = Object.entries(languageCount).sort((a, b) => b[1] - a[1])[0]?.[0] || "JavaScript";
+  const recentlyUpdated = repos
+    .filter((repo) => repo && !repo.fork)
+    .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+    .slice(0, 3)
+    .map((repo) => repo.name);
+
+  const value = {
+    profile: {
+      public_repos: Number(profileRaw?.public_repos || 0),
+      followers: Number(profileRaw?.followers || 0),
+      following: Number(profileRaw?.following || 0)
+    },
+    topLanguage,
+    recentlyUpdated
+  };
+  setCachedGithub(cacheKey, value);
+  return value;
+}
+
+async function fetchGithubRepos(username) {
+  const cacheKey = `repos:${username}`;
+  const cached = getCachedGithub(cacheKey);
+  if (cached) {
+    return cached;
+  }
+  const headers = {
+    Accept: "application/vnd.github+json",
+    "User-Agent": "portfolio-server"
+  };
+  const reposRaw = await getJsonHttps(`https://api.github.com/users/${encodeURIComponent(username)}/repos?sort=updated&per_page=30`, headers);
+  const repos = Array.isArray(reposRaw) ? reposRaw : [];
+  setCachedGithub(cacheKey, repos);
+  return repos;
 }
 
 async function sendResendEmail(message) {
@@ -324,6 +450,36 @@ async function trySendEmail(message) {
 async function handleApi(req, res, urlObj) {
   if (req.method === "GET" && urlObj.pathname === "/api/health") {
     sendJson(res, 200, { ok: true, status: "healthy", timestamp: new Date().toISOString() });
+    return;
+  }
+
+  if (req.method === "GET" && urlObj.pathname === "/api/github/stats") {
+    const username = sanitizeText(urlObj.searchParams.get("user") || "Amitkumar8384", 80);
+    if (!username) {
+      sendJson(res, 400, { ok: false, message: "Invalid GitHub username." });
+      return;
+    }
+    try {
+      const data = await fetchGithubStats(username);
+      sendJson(res, 200, { ok: true, ...data });
+    } catch (error) {
+      sendJson(res, 502, { ok: false, message: error.message || "Unable to fetch GitHub stats." });
+    }
+    return;
+  }
+
+  if (req.method === "GET" && urlObj.pathname === "/api/github/repos") {
+    const username = sanitizeText(urlObj.searchParams.get("user") || "Amitkumar8384", 80);
+    if (!username) {
+      sendJson(res, 400, { ok: false, message: "Invalid GitHub username." });
+      return;
+    }
+    try {
+      const repos = await fetchGithubRepos(username);
+      sendJson(res, 200, { ok: true, items: repos });
+    } catch (error) {
+      sendJson(res, 502, { ok: false, message: error.message || "Unable to fetch GitHub repositories." });
+    }
     return;
   }
 
