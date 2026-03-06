@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Inbox | Portfolio</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="admin-wrap">
+    <header class="admin-head">
+      <h1>Portfolio Inbox</h1>
+      <p>Securely review contact messages.</p>
+    </header>
+
+    <section class="token-panel">
+      <label for="adminToken">Admin Token</label>
+      <div class="token-row">
+        <input id="adminToken" type="password" placeholder="Enter ADMIN_TOKEN" autocomplete="off">
+        <button id="saveTokenBtn" type="button">Save</button>
+      </div>
+      <p id="tokenStatus" class="hint"></p>
+    </section>
+
+    <section class="actions">
+      <button id="refreshBtn" type="button">Refresh</button>
+      <button id="clearTokenBtn" type="button" class="ghost">Clear Token</button>
+      <span id="countBadge" class="count">0 messages</span>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <span>Total</span>
+        <strong id="totalStat">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Today</span>
+        <strong id="todayStat">0</strong>
+      </article>
+      <article class="stat-card">
+        <span>Unique Emails</span>
+        <strong id="uniqueStat">0</strong>
+      </article>
+    </section>
+
+    <section class="search-row">
+      <input id="searchInput" type="text" placeholder="Search by name, email, message...">
+    </section>
+
+    <section id="messagesContainer" class="messages"></section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

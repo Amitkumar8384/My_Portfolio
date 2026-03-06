@@ -1,0 +1,11 @@
+{
+  "name": "amit-portfolio-fullstack",
+  "version": "1.0.0",
+  "description": "Amit portfolio with Node.js backend contact API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "license": "MIT"
+}

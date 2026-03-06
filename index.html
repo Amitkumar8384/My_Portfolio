@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amit | Advanced Frontend Portfolio</title>
+  <meta name="description" content="Amit Kumar - Web Developer / Frontend Developer building modern scalable web applications.">
+  <meta name="author" content="Amit Kumar">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#05070f">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Amit Kumar | Frontend Developer Portfolio">
+  <meta property="og:description" content="Frontend developer portfolio with projects, GitHub activity, and contact details.">
+  <meta property="og:image" content="images/portfolio_image-removebg-preview (3).png">
+  <meta property="og:url" content="https://example.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Amit Kumar | Frontend Developer Portfolio">
+  <meta name="twitter:description" content="Modern responsive portfolio by Amit Kumar.">
+  <meta name="twitter:image" content="images/portfolio_image-removebg-preview (3).png">
+  <link rel="canonical" href="https://example.com/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Amit Kumar",
+      "jobTitle": "Frontend Developer",
+      "email": "mailto:Amitkumar838401@gmail.com",
+      "telephone": "+91-8384010361",
+      "url": "https://example.com/",
+      "sameAs": [
+        "https://github.com/Amitkumar8384",
+        "https://linkedin.com/in/amitkumar"
+      ],
+      "knowsAbout": ["HTML", "CSS", "JavaScript", "Angular", "React", "Git", "GitHub"]
+    }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">Skip to main content</a>
+  <div id="scrollProgress" class="scroll-progress" aria-hidden="true"></div>
+  <div id="loader" class="loader" aria-label="Loading portfolio">
+    <div class="loader-line"></div>
+    <p>Preparing experience...</p>
+  </div>
+
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <a class="whatsapp-float magnetic" href="https://wa.me/918384010361?text=Hi%20Amit%2C%20I%20want%20to%20discuss%20a%20web%20project." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+  <button id="backToTop" class="back-to-top magnetic" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+  <div id="navBackdrop" class="nav-backdrop" aria-hidden="true"></div>
+
+  <header class="site-header glass">
+    <a href="#hero" class="logo">AMIT</a>
+    <nav id="mainNav" aria-label="Primary">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#github">GitHub</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button id="themeToggle" class="theme-toggle icon-btn" aria-label="Toggle theme" aria-pressed="false" title="Toggle dark/light mode">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <button id="menuToggle" class="menu-toggle icon-btn" aria-label="Open mobile menu" aria-controls="mainNav" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main id="mainContent">
+    <section id="hero" class="hero section">
+      <div class="hero-content reveal">
+        <p class="eyebrow">Web Developer / Frontend Developer</p>
+        <h1>Amit Kumar</h1>
+        <h2 class="hero-title-glow">Frontend Developer</h2>
+        <p class="tagline" id="typedLine">I build modern and scalable web applications</p>
+
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary magnetic">View Projects</a>
+          <a href="#contact" class="btn btn-secondary magnetic">Contact Me</a>
+          <a href="assets/AmitKumarResume.pdf" class="btn btn-glass magnetic" download>Download Resume</a>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+        <div class="hero-card glass tilt-card">
+          <div class="hero-profile-image-wrap">
+            <img src="./images/portfolio_image-removebg-preview (3).png" alt="Amit Kumar profile" class="hero-profile-image profile-photo" loading="lazy" decoding="async">
+            <div class="profile-placeholder hero-placeholder" aria-label="Profile image placeholder">AK</div>
+          </div>
+          <p>Frontend Systems</p>
+          <h3>JavaScript, Angular, React concepts, and responsive UI development with real-world delivery.</h3>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2 class="section-title reveal">About</h2>
+      <div class="about-grid">
+        <article class="glass reveal tilt-card">
+          <h3>Summary</h3>
+          <p>
+            Frontend Developer skilled in JavaScript, Angular, and responsive UI development.
+            Experienced in building dynamic dashboards with real-time data handling and validation.
+          </p>
+          <p>
+            Focused on delivering scalable, user-friendly web applications with clean architecture,
+            performance optimization, and maintainable code quality.
+          </p>
+        </article>
+
+        <article class="glass profile-card reveal tilt-card">
+          <div class="profile-image-frame">
+            <img src="images/portfolio_image-removebg-preview (3).png" alt="Amit Kumar" class="profile-image profile-photo" loading="lazy" decoding="async">
+            <div class="profile-placeholder" aria-label="Profile image placeholder">AK</div>
+          </div>
+          <h3>Amit Kumar</h3>
+          <p>Web Developer / Frontend Developer</p>
+          <p class="journey">New Delhi, India | API Integration | DOM Manipulation | Responsive Design</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <h2 class="section-title reveal">Experience & Education</h2>
+      <div class="experience-grid">
+        <article class="glass reveal tilt-card">
+          <h3>Nayan India Science & Technologies Pvt. Ltd</h3>
+          <p class="meta">Digital Specialist | New Delhi | 05/2024 - Present</p>
+          <ul>
+            <li>Monitored real-time AI dashboards for high event detection accuracy.</li>
+            <li>Filtered false detections and maintained data quality.</li>
+            <li>Performed image/video annotation for AI/ML training datasets.</li>
+          </ul>
+        </article>
+        <article class="glass reveal tilt-card">
+          <h3>Ziyyara Edutech Pvt. Ltd</h3>
+          <p class="meta">Web Developer | Noida | 11/2023 - 02/2024</p>
+          <ul>
+            <li>Developed responsive pages with HTML, CSS, JavaScript.</li>
+            <li>Assisted Angular frontend development and API integration.</li>
+            <li>Used Git/GitHub workflow for version control and collaboration.</li>
+          </ul>
+        </article>
+        <article class="glass reveal tilt-card">
+          <h3>Education</h3>
+          <p class="meta">IGNOU | Bachelor of Computer Application (BCA) | 2022</p>
+          <p class="meta">CBSE Class XII (2017) | CBSE Class X (2015)</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <h2 class="section-title reveal">Skills</h2>
+      <div class="skills-bento reveal">
+        <article class="glass bento-card bento-primary">
+          <p class="bento-label">Core Strength</p>
+          <h3>JavaScript Engineering</h3>
+          <p>Building performant UI logic, API workflows, and reusable frontend modules.</p>
+          <div class="bento-counter"><span class="skill-counter" data-target="90">0</span>%</div>
+        </article>
+        <article class="glass bento-card">
+          <p class="bento-label">UI Craft</p>
+          <h3>CSS & Responsive Design</h3>
+          <p>Modern layouts, design systems, visual polish, and mobile-first implementation.</p>
+          <div class="bento-counter"><span class="skill-counter" data-target="92">0</span>%</div>
+        </article>
+        <article class="glass bento-card">
+          <p class="bento-label">Workflow</p>
+          <h3>Git, GitHub, Collaboration</h3>
+          <p>Clean version control practices, feature branches, and team-friendly delivery.</p>
+          <div class="bento-counter"><span class="skill-counter" data-target="89">0</span>%</div>
+        </article>
+      </div>
+      <div class="skills-tags reveal" aria-label="Skill tags">
+        <span>Performance</span><span>Accessibility</span><span>API Integration</span><span>Component Architecture</span>
+        <span>DOM Manipulation</span><span>UI Animation</span><span>Code Quality</span><span>Scalable Frontend</span>
+      </div>
+      <div class="skills-grid">
+        <article class="glass reveal tilt-card">
+          <h3>Languages & Frameworks</h3>
+          <p class="skills-lead">Core frontend stack for modern product development.</p>
+          <div class="skill-list">
+            <div class="skill-item">
+              <div class="skill-head"><span><i class="devicon-html5-plain colored"></i> HTML5</span><strong>96%</strong></div>
+              <div class="bar"><span style="--value:96%"></span></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-head"><span><i class="devicon-css3-plain colored"></i> CSS3</span><strong>92%</strong></div>
+              <div class="bar"><span style="--value:92%"></span></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-head"><span><i class="devicon-javascript-plain colored"></i> JavaScript</span><strong>90%</strong></div>
+              <div class="bar"><span style="--value:90%"></span></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-head"><span><i class="devicon-angularjs-plain colored"></i> Angular</span><strong>82%</strong></div>
+              <div class="bar"><span style="--value:82%"></span></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-head"><span><i class="devicon-react-original colored"></i> React Concepts</span><strong>80%</strong></div>
+              <div class="bar"><span style="--value:80%"></span></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-head"><span><i class="devicon-python-plain colored"></i> Python</span><strong>65%</strong></div>
+              <div class="bar"><span style="--value:65%"></span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass reveal tilt-card">
+          <h3>Tools & Concepts</h3>
+          <p class="skills-lead">Workflow, productivity, and architecture strengths.</p>
+          <div class="skill-list">
+            <div class="skill-item">
+              <div class="skill-head"><span><i class="devicon-git-plain colored"></i> Git</span><strong>88%</strong></div>
+              <div class="bar"><span style="--value:88%"></span></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-head"><span><i class="devicon-github-original colored"></i> GitHub</span><strong>89%</strong></div>
+              <div class="bar"><span style="--value:89%"></span></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-head"><span><i class="devicon-vscode-plain colored"></i> VS Code</span><strong>94%</strong></div>
+              <div class="bar"><span style="--value:94%"></span></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-head"><span><i class="devicon-bootstrap-plain colored"></i> Bootstrap</span><strong>78%</strong></div>
+              <div class="bar"><span style="--value:78%"></span></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-head"><span><i class="fa-solid fa-mobile-screen-button"></i> Responsive Design</span><strong>92%</strong></div>
+              <div class="bar"><span style="--value:92%"></span></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-head"><span><i class="fa-solid fa-plug"></i> API Integration</span><strong>84%</strong></div>
+              <div class="bar"><span style="--value:84%"></span></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section-header">
+        <h2 class="section-title reveal">Projects</h2>
+        <p class="reveal">Featured from resume + auto-loaded GitHub repositories</p>
+      </div>
+      <div id="projectsGrid" class="projects-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="github" class="section">
+      <h2 class="section-title reveal">GitHub Stats</h2>
+      <div class="github-layout">
+        <article class="glass reveal github-card github-graph-card tilt-card">
+          <div class="github-head">
+            <h3>Contribution Activity</h3>
+            <span class="github-chip">@Amitkumar8384</span>
+          </div>
+          <img id="contribGraph" class="graph-image" alt="GitHub contribution graph" src="" loading="lazy">
+        </article>
+
+        <div id="githubStatsList" class="github-stats-grid reveal" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2 class="section-title reveal">Contact</h2>
+      <div class="contact-grid">
+        <form id="contactForm" class="glass reveal tilt-card" novalidate>
+          <input type="text" name="company" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required minlength="2" maxlength="60" autocomplete="name">
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email">
+
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required minlength="10" maxlength="800"></textarea>
+
+          <button id="contactSubmitBtn" type="submit" class="btn btn-primary magnetic">Send Message</button>
+          <p id="formStatus" aria-live="polite"></p>
+        </form>
+
+        <article class="glass reveal contact-links tilt-card">
+          <h3>Connect Directly</h3>
+          <p class="contact-subtitle">Open to freelance, full-time, and collaboration opportunities.</p>
+          <div class="contact-link-grid">
+            <a href="mailto:Amitkumar838401@gmail.com"><i class="fa-solid fa-envelope"></i><span>Amitkumar838401@gmail.com</span></a>
+            <a href="tel:+918384010361"><i class="fa-solid fa-phone"></i><span>+91 8384010361</span></a>
+            <a href="https://github.com/Amitkumar8384" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i><span>GitHub</span></a>
+            <a href="https://linkedin.com/in/amitkumar" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i><span>LinkedIn</span></a>
+            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
+            <a href="https://wa.me/918384010361?text=Hi%20Amit%2C%20I%20want%20to%20hire%20you%20for%20a%20frontend%20project." target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Copyright 2026 Amit Kumar. Built with HTML, CSS, JavaScript.</p>
+  </footer>
+  <noscript>
+    <p class="noscript-note">This website works best with JavaScript enabled.</p>
+  </noscript>
+  <script src="script.js" defer></script>
+</body>
+</html>
