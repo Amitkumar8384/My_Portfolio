@@ -164,6 +164,12 @@ function setMenuOpen(isOpen) {
   navBackdrop?.classList.toggle("show", isOpen);
 }
 
+function ensureScrollUnlocked() {
+  if (window.innerWidth > 1020) {
+    setMenuOpen(false);
+  }
+}
+
 menuToggle?.addEventListener("click", () => {
   const isOpen = !navLinks?.classList.contains("open");
   setMenuOpen(Boolean(isOpen));
@@ -198,6 +204,10 @@ document.addEventListener("keydown", (event) => {
     setMenuOpen(false);
   }
 });
+
+window.addEventListener("resize", ensureScrollUnlocked, { passive: true });
+window.addEventListener("pageshow", ensureScrollUnlocked);
+ensureScrollUnlocked();
 
 // Premium section snapping behavior: nav click aligns section with sticky header offset.
 function scrollToSection(hash) {
