@@ -60,34 +60,66 @@ const featuredProjects = [
   }
 ];
 
+// const services = [
+//   {
+//     title: "Portfolio Websites",
+//     description: "Modern portfolio websites designed to showcase your work, attract recruiters, and highlight real projects with a polished UI.",
+//     icon: "fa-laptop-code"
+//   },
+//   {
+//     title: "Landing Pages",
+//     description: "High-converting landing pages built to turn visitors into customers with clear CTAs, fast performance, and modern design.",
+//     icon: "fa-bullseye"
+//   },
+//   {
+//     title: "Dashboard UI",
+//     description: "Clean and scalable dashboard interfaces for admin panels, analytics tools, and data-driven web applications.",
+//     icon: "fa-chart-line"
+//   },
+//   {
+//     title: "API Integration",
+//     description: "Seamless frontend integration with REST APIs, enabling real-time data, secure communication, and smooth user experience.",
+//     icon: "fa-plug-circle-check"
+//   },
+//   {
+//     title: "UI Revamp",
+//     description: "Modern redesign of outdated interfaces with improved usability, performance optimization, and better accessibility.",
+//     icon: "fa-wand-magic-sparkles"
+//   }
+  
+// ];
 const services = [
   {
     title: "Portfolio Websites",
-    description: "Fast, responsive, recruiter-focused portfolio with real project storytelling and polished UI.",
+    description: "Modern portfolio websites designed to showcase your work, attract recruiters, and highlight real projects with a polished UI.",
     icon: "fa-laptop-code"
   },
   {
     title: "Landing Pages",
-    description: "Conversion-oriented product pages with clean CTAs, semantic structure, and performance-first build.",
+    description: "High-converting landing pages built to turn visitors into customers with clear CTAs, fast performance, and modern design.",
     icon: "fa-bullseye"
   },
   {
     title: "Dashboard UI",
-    description: "Data-dense dashboard interfaces with readable hierarchy, filter patterns, and mobile adaptability.",
+    description: "Clean and scalable dashboard interfaces for admin panels, analytics tools, and data-driven web applications.",
     icon: "fa-chart-line"
   },
   {
     title: "API Integration",
-    description: "Frontend integration with REST APIs, validations, loaders, and resilient error handling flows.",
+    description: "Seamless frontend integration with REST APIs, enabling real-time data, secure communication, and smooth user experience.",
     icon: "fa-plug-circle-check"
   },
   {
     title: "UI Revamp",
-    description: "Legacy interface modernization with better spacing systems, interaction polish, and accessibility pass.",
+    description: "Modern redesign of outdated interfaces with improved usability, performance optimization, and better accessibility.",
     icon: "fa-wand-magic-sparkles"
-  }
+  },
+  {
+  title: "Responsive Web Development",
+  description: "Mobile-first websites that look and perform perfectly across all devices including phones, tablets, and desktops.",
+  icon: "fa-mobile-screen"
+}
 ];
-
 const testimonials = [
   {
     quote: "Amit delivered clean frontend work quickly and handled feedback without delay. The final UI felt production ready.",
@@ -634,7 +666,7 @@ function typeHeroLine() {
     return;
   }
 
-  const sentence = "I build modern and scalable web applications";
+  const sentence = "Building high-performance, responsive web experiences.";
   let index = 0;
   typedLine.textContent = "";
 
