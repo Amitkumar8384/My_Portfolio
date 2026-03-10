@@ -18,7 +18,7 @@ const rateLimitByIp = new Map();
 const githubCache = new Map();
 const GITHUB_CACHE_TTL_MS = 10 * 60 * 1000;
 
-const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
+const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "Amitkumar").trim();
 const RESEND_API_KEY = String(process.env.RESEND_API_KEY || "");
 const WEB3FORMS_ACCESS_KEY = String(process.env.WEB3FORMS_ACCESS_KEY || "");
 const CONTACT_TO_EMAIL = String(process.env.CONTACT_TO_EMAIL || "Amitkumar838401@gmail.com");

@@ -1,25 +1,63 @@
 const GITHUB_USER = "Amitkumar8384";
 
 const featuredProjects = [
+  // {
+  //   slug: "freshnut-ecommerce",
+  //   title: "Freshnut E-commerce Website",
+  //   description: "Responsive e-commerce website with dynamic product listing, reusable UI blocks, and local-storage cart.",
+  //   image: "./images/image.png",
+  //   tech: ["HTML5", "CSS3", "JavaScript ES6", "Local Storage"],
+  //   live: "https://amitkumar8384.github.io/FreshNut/",
+  //   github: "https://github.com/Amitkumar8384/FreshNut",
+  //   source: "Resume Project",
+  //   category: "frontend",
+  //   stars: null,
+  //   forks: null,
+  //   caseStudy: {
+  //     problem: "Need tha ek simple but conversion-focused e-commerce frontend jo fast load ho aur mobile me smooth chale.",
+  //     approach: "Reusable UI blocks, localStorage cart, and clear product discovery flow build kiya with lightweight vanilla JS.",
+  //     impact: "Catalog browsing and cart flow friction kam hua; demo deployments aur recruiter reviews me project highlight bana.",
+  //     stack: "HTML5, CSS3, JavaScript, LocalStorage"
+  //   }
+  // },
   {
-    slug: "freshnut-ecommerce",
-    title: "Freshnut E-commerce Website",
-    description: "Responsive e-commerce website with dynamic product listing, reusable UI blocks, and local-storage cart.",
-    image: "./images/image.png",
-    tech: ["HTML5", "CSS3", "JavaScript ES6", "Local Storage"],
-    live: "https://amitkumar8384.github.io/FreshNut/",
-    github: "https://github.com/Amitkumar8384/FreshNut",
-    source: "Resume Project",
-    category: "frontend",
-    stars: null,
-    forks: null,
-    caseStudy: {
-      problem: "Need tha ek simple but conversion-focused e-commerce frontend jo fast load ho aur mobile me smooth chale.",
-      approach: "Reusable UI blocks, localStorage cart, and clear product discovery flow build kiya with lightweight vanilla JS.",
-      impact: "Catalog browsing and cart flow friction kam hua; demo deployments aur recruiter reviews me project highlight bana.",
-      stack: "HTML5, CSS3, JavaScript, LocalStorage"
-    }
-  },
+  slug: "freshnut-ecommerce",
+  title: "Freshnut E-commerce Website",
+  description: "A responsive e-commerce website with product listing and a shopping cart using Local Storage.",
+  image: "./images/freshnut.png",
+  tech: ["HTML5", "CSS3", "JavaScript", "Local Storage"],
+  live: "https://amitkumar8384.github.io/FreshNut/",
+  github: "https://github.com/Amitkumar8384/FreshNut",
+  source: "Portfolio Project",
+  category: "frontend",
+  stars: null,
+  forks: null,
+  caseStudy: {
+    problem: "Users need a simple online store to browse products and add them to a cart.",
+    approach: "Built reusable UI components and implemented a cart system using Local Storage.",
+    impact: "The project demonstrates e-commerce UI design, product listing, and cart functionality.",
+    stack: "HTML5, CSS3, JavaScript, LocalStorage"
+  }
+},
+  {
+  slug: "weather-app-pro",
+  title: "Weather App Pro",
+  description: "A simple weather application that shows real-time weather information for any city using a public weather API.",
+  image: "./images/weather.png",
+  tech: ["HTML5", "CSS3", "JavaScript", "Weather API", "Fetch API"],
+  live: "https://amitkumar8384.github.io/Weather-App-pro/",
+  github: "https://github.com/Amitkumar8384/Weather-App-pro",
+  source: "Portfolio Project",
+  category: "frontend",
+  stars: "12",
+  forks: "3",
+  caseStudy: {
+    problem: "Users need a quick way to check the current weather of any city online.",
+    approach: "Used JavaScript Fetch API to get weather data from an API and update the UI dynamically.",
+    impact: "This project demonstrates API integration, asynchronous JavaScript, and responsive UI design.",
+    stack: "HTML5, CSS3, JavaScript, Weather API"
+  }
+},
   {
     slug: "todo-list-app",
     title: "To-Do List Application",
@@ -60,34 +98,6 @@ const featuredProjects = [
   }
 ];
 
-// const services = [
-//   {
-//     title: "Portfolio Websites",
-//     description: "Modern portfolio websites designed to showcase your work, attract recruiters, and highlight real projects with a polished UI.",
-//     icon: "fa-laptop-code"
-//   },
-//   {
-//     title: "Landing Pages",
-//     description: "High-converting landing pages built to turn visitors into customers with clear CTAs, fast performance, and modern design.",
-//     icon: "fa-bullseye"
-//   },
-//   {
-//     title: "Dashboard UI",
-//     description: "Clean and scalable dashboard interfaces for admin panels, analytics tools, and data-driven web applications.",
-//     icon: "fa-chart-line"
-//   },
-//   {
-//     title: "API Integration",
-//     description: "Seamless frontend integration with REST APIs, enabling real-time data, secure communication, and smooth user experience.",
-//     icon: "fa-plug-circle-check"
-//   },
-//   {
-//     title: "UI Revamp",
-//     description: "Modern redesign of outdated interfaces with improved usability, performance optimization, and better accessibility.",
-//     icon: "fa-wand-magic-sparkles"
-//   }
-  
-// ];
 const services = [
   {
     title: "Portfolio Websites",
