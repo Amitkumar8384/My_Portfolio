@@ -1,25 +1,33 @@
 const GITHUB_USER = "Amitkumar8384";
 
 const featuredProjects = [
-  // {
-  //   slug: "freshnut-ecommerce",
-  //   title: "Freshnut E-commerce Website",
-  //   description: "Responsive e-commerce website with dynamic product listing, reusable UI blocks, and local-storage cart.",
-  //   image: "./images/image.png",
-  //   tech: ["HTML5", "CSS3", "JavaScript ES6", "Local Storage"],
-  //   live: "https://amitkumar8384.github.io/FreshNut/",
-  //   github: "https://github.com/Amitkumar8384/FreshNut",
-  //   source: "Resume Project",
-  //   category: "frontend",
-  //   stars: null,
-  //   forks: null,
-  //   caseStudy: {
-  //     problem: "Need tha ek simple but conversion-focused e-commerce frontend jo fast load ho aur mobile me smooth chale.",
-  //     approach: "Reusable UI blocks, localStorage cart, and clear product discovery flow build kiya with lightweight vanilla JS.",
-  //     impact: "Catalog browsing and cart flow friction kam hua; demo deployments aur recruiter reviews me project highlight bana.",
-  //     stack: "HTML5, CSS3, JavaScript, LocalStorage"
-  //   }
-  // },
+  {
+  slug: "expense-tracker",
+  title: "Expense Tracker",
+  description: "A full-stack personal finance management application for tracking income and expenses, managing budgets, recurring transactions, and viewing financial reports.",
+  image: "./images/expense-tracker.png",
+  tech: [
+    "React",
+    "Vite",
+    "Node.js",
+    "Express.js",
+    "MySQL",
+    "JWT",
+    "REST API"
+  ],
+  live: "https://expense-tracker-lyart-beta-32.vercel.app/",
+  github: "https://github.com/Amitkumar8384/expense-tracker",
+  source: "Portfolio Project",
+  category: "fullstack",
+  stars: null,
+  forks: null,
+  caseStudy: {
+    problem: "Users need a simple and secure way to track their income and expenses while managing budgets and recurring transactions.",
+    approach: "Built a full-stack application with React for the frontend, Node.js and Express.js for the REST API, and MySQL for persistent data storage. Implemented JWT authentication, protected APIs, expense management, budgets, recurring transactions, reports, and profile management.",
+    impact: "The project demonstrates full-stack development, authentication, database management, REST API integration, responsive UI design, and production deployment.",
+    stack: "React, Vite, Node.js, Express.js, MySQL, JWT, REST API"
+  }
+},
   {
   slug: "freshnut-ecommerce",
   title: "Freshnut E-commerce Website",
