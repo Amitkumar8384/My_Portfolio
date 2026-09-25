@@ -1,18 +1,26 @@
-# 💻 Amit Kumar - Developer Portfolio
+# 💻 Amit Kumar — Developer Portfolio
 
-A modern and responsive personal portfolio website showcasing my **skills, projects, experience, and journey as a Full-Stack Web Developer**.
+A modern and responsive personal portfolio website showcasing my
+**skills, projects, experience, and web development journey.**
+
+---
 
 ## 🚀 Live Portfolio
 
-👉 **[Visit My Portfolio](https://amitkumar8384.github.io/My_Portfolio/)**
+👉 **[Visit My Portfolio](https://my-portfolio-vm3y.vercel.app/)**
 
 ---
 
 ## 👨‍💻 About Me
 
-Hi, I'm **Amit Kumar**, a Full-Stack Web Developer passionate about building modern, responsive and practical web applications.
+Hi, I'm **Amit Kumar**, a Frontend Developer focused on building
+modern, responsive and user-friendly web applications.
 
-I enjoy turning ideas into functional web experiences and continuously improving my development skills by building real-world projects.
+I enjoy turning ideas into functional web experiences and continuously
+improving my development skills by building practical projects.
+
+My current focus is **React.js, JavaScript, responsive UI development,
+REST APIs, Node.js and MySQL**.
 
 ---
 
@@ -23,39 +31,43 @@ I enjoy turning ideas into functional web experiences and continuously improving
 - 🚀 Project showcase
 - 📄 Resume section
 - 📬 Contact section
-- 🔗 Social media links
-- 📱 Fully responsive design
+- 🔗 Social links
+- 📱 Responsive design
 - 🎨 Modern UI
 - ⚡ Smooth interactions
-- 🌐 GitHub project links
-- 🚀 Live project demos
+- 🔗 GitHub project links
+- 🌐 Live project demos
 
 ---
 
 ## 🛠️ Technologies
 
-### Frontend
+### 🎨 Frontend
 
 - HTML5
 - CSS3
 - JavaScript
 - React.js
+- Bootstrap
+- Tailwind CSS
 
-### Backend
+### ⚙️ Backend
 
 - Node.js
 - Express.js
 - REST APIs
+- JWT
 
-### Database
+### 🗄️ Database
 
 - MySQL
 
-### Tools & Platforms
+### 🧰 Tools & Platforms
 
 - Git
 - GitHub
 - VS Code
+- Vite
 - Vercel
 - GitHub Pages
 
@@ -63,31 +75,50 @@ I enjoy turning ideas into functional web experiences and continuously improving
 
 ## 🚀 Featured Projects
 
-Some of my projects include:
-
 ### 💰 Expense Tracker
 
-Full-stack expense management application with authentication, income/expense management, reports and analytics.
+Full-stack expense management application with authentication,
+income/expense management, reports and analytics.
 
-**Tech:** React, Node.js, Express, MySQL, JWT
+**Tech:** React, Node.js, Express.js, MySQL, JWT
+
+---
 
 ### 🥜 FreshNut
 
-Responsive e-commerce website with product listing and shopping cart functionality.
+Responsive dry fruits e-commerce website with product browsing
+and shopping cart functionality.
 
 **Tech:** HTML, CSS, JavaScript, LocalStorage
+
+---
 
 ### 🌙 Midnight Journal
 
-Personal journaling application with journal entries, calendar, writing streaks and insights.
+Personal journaling application with journal entries, calendar,
+writing streaks and insights.
 
 **Tech:** HTML, CSS, JavaScript, LocalStorage
 
+---
+
 ### 💻 TechAmitCode
 
-Developer-focused learning platform containing tutorials, notes, cheat sheets, practice and projects.
+Developer-focused learning platform containing tutorials, notes,
+cheat sheets, practice and projects.
 
 **Tech:** HTML, CSS, JavaScript
+
+---
+
+### 🇪🇬 Egypt Facts
+
+Interactive React application displaying information and facts
+about Egypt using API-based data.
+
+**Tech:** React, JavaScript, API
+
+---
 
 ### 🎮 Tic Tac Toe
 
@@ -95,46 +126,31 @@ Interactive browser-based Tic Tac Toe game.
 
 **Tech:** HTML, CSS, JavaScript
 
-### 🇪🇬 Egypt Facts
-
-Interactive React application displaying information and facts about Egypt.
-
-**Tech:** React, JavaScript, API
-
 ---
 
 ## 📚 Currently Learning
 
 - ⚛️ Advanced React.js
-- 🟢 Node.js
-- 🚂 Express.js
+- 🟢 Node.js & Express.js
 - 🗄️ SQL & MySQL
-- ☁️ AWS
-- 🚀 Backend Development
-- 🔧 DevOps fundamentals
+- ☁️ AWS fundamentals
+- 🔧 Backend development
 
 ---
 
-## 🎯 My Goal
+## 🎯 Development Focus
 
-To become a strong **Full-Stack Developer** by continuously building real-world applications, improving problem-solving skills and learning modern technologies.
-
----
-
-## 🌐 Connect With Me
-
-🔗 **GitHub:**  
-https://github.com/Amitkumar8384
-
-🔗 **Portfolio:**  
-https://amitkumar8384.github.io/My_Portfolio/
-
----
-
-## ⭐ Support
-
-If you like my projects, feel free to ⭐ **Star** the repositories and follow my GitHub journey.
-
----
-
-### 🚀 Keep Learning. Keep Building.
+```text
+Responsive UI
+      ↓
+React.js
+      ↓
+REST APIs
+      ↓
+Node.js + Express.js
+      ↓
+MySQL
+      ↓
+Authentication
+      ↓
+Full-Stack Applications
